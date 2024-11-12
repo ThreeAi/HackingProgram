@@ -12,16 +12,14 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.Set;
+
+import static edu.program.hackingprogram.KeyFinder.findKeyUsingFullBruteForce;
+import static edu.program.hackingprogram.KeyFinder.loadDictionary;
+import static edu.program.hackingprogram.KeyLengthFinder.findKeyLength;
+import static edu.program.hackingprogram.VigenereCipher.decrypt;
 
 public class HackController {
-    @FXML
-    private Button text_import_button;
-    @FXML
-    private Button text_export_button;
-    @FXML
-    private Button key_export_button;
-    @FXML
-    private Button hack_button;
     @FXML
     private TextArea input_textarea;
     @FXML
@@ -30,8 +28,8 @@ public class HackController {
     private TextArea key_output_textarea;
     @FXML
     private Label status_label;
-
-    private VigenereCipherBreaker vigenereCracker = new VigenereCipherBreaker();
+    @FXML
+    private Label status_second_label;
 
     private Stage stage;
 
@@ -49,6 +47,7 @@ public class HackController {
     public void exportKey() { importFileContent(key_output_textarea);}
 
     // Метод для взлома текста
+    @FXML
     private void hackText() {
         String encryptedText = input_textarea.getText();
         if (encryptedText.isEmpty()) {
@@ -57,15 +56,17 @@ public class HackController {
         }
 
         try {
-            // Attempt to break the cipher, using Kasiski or Index of Coincidence to guess key length
-            String key = vigenereCracker.findKey(encryptedText);
-            String decryptedText = vigenereCracker.decrypt(encryptedText, key);
+            int keyLength = findKeyLength(encryptedText);
+            status_label.setText(String.valueOf(keyLength));
+            Set<String> dictionary = loadDictionary("word_list.txt");
+            String findKey = findKeyUsingFullBruteForce(encryptedText, keyLength, dictionary, status_second_label);
+            String decryptedText = decrypt(encryptedText, findKey);
 
-            // Display results
             output_textarea.setText(decryptedText);
-            key_output_textarea.setText(key);
-            status_label.setText("Decryption complete.");
+            key_output_textarea.setText(findKey);
+//            status_label.setText("Decryption complete.");
         } catch (Exception e) {
+            e.printStackTrace();
             status_label.setText("Error decrypting text.");
         }
     }

@@ -19,13 +19,13 @@
                     </HBox.margin>
                 </Label>
                 <Region HBox.hgrow="ALWAYS" />
-                <Button fx:id="text_import_button" alignment="CENTER_RIGHT" contentDisplay="RIGHT" mnemonicParsing="false" text="Import input" HBox.hgrow="ALWAYS" />
-                <Button fx:id="text_export_button" alignment="CENTER_RIGHT" contentDisplay="RIGHT" mnemonicParsing="false" text="Export output" HBox.hgrow="ALWAYS">
+                <Button fx:id="text_import_button" onAction="#importText" alignment="CENTER_RIGHT" contentDisplay="RIGHT" mnemonicParsing="false" text="Import input" HBox.hgrow="ALWAYS" />
+                <Button fx:id="text_export_button" onAction="#exportText" alignment="CENTER_RIGHT" contentDisplay="RIGHT" mnemonicParsing="false" text="Export output" HBox.hgrow="ALWAYS">
                     <HBox.margin>
                         <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                     </HBox.margin>
                 </Button>
-                <Button fx:id="key_export_button" alignment="CENTER_RIGHT" contentDisplay="RIGHT" mnemonicParsing="false" text="Export key" HBox.hgrow="ALWAYS">
+                <Button fx:id="key_export_button" onAction="#exportKey" alignment="CENTER_RIGHT" contentDisplay="RIGHT" mnemonicParsing="false" text="Export key" HBox.hgrow="ALWAYS">
                     <HBox.margin>
                         <Insets right="10.0" />
                     </HBox.margin>
@@ -47,7 +47,7 @@
         </TextArea>
         <HBox>
             <children>
-                <Button fx:id="hack_button" mnemonicParsing="false" text="Hack!">
+                <Button fx:id="hack_button" onAction="#hackText" mnemonicParsing="false" text="Hack!">
                     <HBox.margin>
                         <Insets left="10.0" />
                     </HBox.margin>
@@ -55,6 +55,7 @@
                 <HBox alignment="CENTER" HBox.hgrow="ALWAYS">
                     <children>
                         <Label fx:id="status_label" alignment="CENTER" contentDisplay="CENTER" nodeOrientation="LEFT_TO_RIGHT" text="Status:" HBox.hgrow="ALWAYS" />
+                        <Label fx:id="status_second_label" alignment="CENTER" contentDisplay="CENTER" nodeOrientation="LEFT_TO_RIGHT" text="Key Length:" HBox.hgrow="ALWAYS" />
                     </children>
                 </HBox>
             </children>

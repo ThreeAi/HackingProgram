@@ -72,6 +72,27 @@
                     </execution>
                 </executions>
             </plugin>
+            <plugin>
+                <groupId>io.github.fvarrui</groupId>
+                <artifactId>javapackager</artifactId>
+                <version>1.7.6</version>
+                <executions>
+                    <execution>
+                        <id>bundle-with-jre</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>package</goal>
+                        </goals>
+                        <configuration>
+                            <name>HackingProgram</name>
+                            <mainClass>edu.program.hackingprogram.HackingApplication</mainClass>
+                            <bundleJre>true</bundleJre>
+                            <jrePath>C:\Program Files\Java\jre-1.8</jrePath>
+                            <platform>windows</platform>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
         </plugins>
     </build>
 </project>

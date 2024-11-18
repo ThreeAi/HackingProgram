@@ -40,7 +40,7 @@
                 <Insets left="10.0" />
             </VBox.margin>
         </Label>
-        <TextArea fx:id="input_textarea">
+        <TextArea fx:id="input_textarea" wrapText="true">
             <VBox.margin>
                 <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
             </VBox.margin>
@@ -65,7 +65,7 @@
                 <Insets left="10.0" top="10.0" />
             </VBox.margin>
         </Label>
-        <TextArea fx:id="output_textarea" prefHeight="207.0" prefWidth="880.0" VBox.vgrow="ALWAYS">
+        <TextArea fx:id="output_textarea" prefHeight="207.0" prefWidth="880.0" VBox.vgrow="ALWAYS" wrapText="true">
             <VBox.margin>
                 <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
             </VBox.margin>
@@ -75,7 +75,7 @@
                 <Insets left="10.0" />
             </VBox.margin>
         </Label>
-        <TextArea fx:id="key_output_textarea" prefHeight="99.0" prefWidth="880.0">
+        <TextArea fx:id="key_output_textarea" prefHeight="99.0" prefWidth="880.0" wrapText="true">
             <VBox.margin>
                 <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
             </VBox.margin>

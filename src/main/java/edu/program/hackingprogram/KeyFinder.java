@@ -38,7 +38,7 @@ public class KeyFinder {
     }
 
     // Метод для подбора ключа с использованием словаря
-    public static String findKeyUsingFullBruteForce(String encryptedText, int keyLength, Set<String> dictionary, Label lab) throws ExecutionException, InterruptedException {
+    public static String findKeyUsingFrequencyAnalysis(String encryptedText, int keyLength, Set<String> dictionary, Label lab) throws ExecutionException, InterruptedException {
         label = lab;
         // Создаём ключ заданной длины, который будет перебираться
         StringBuilder[] groups = new StringBuilder[keyLength];
@@ -101,7 +101,8 @@ public class KeyFinder {
         }
 
         executor.shutdown();
-        return bestKey;
+
+        return removeRepeatedPatterns(bestKey);
 
 
     }
@@ -143,9 +144,14 @@ public class KeyFinder {
     private static int countWordMatches(String text, Set<String> dictionary) {
         int matchCount = 0;
 
+        String textUpperCase = text.toUpperCase();
+
         for (String word : dictionary) {
-            if (text.contains(word.toUpperCase())) {
+            int index = 0;
+
+            while ((index = textUpperCase.indexOf(word.toUpperCase(), index)) != -1) {
                 matchCount++;
+                index += word.length();
             }
         }
 
@@ -160,4 +166,23 @@ public class KeyFinder {
         }
         return fileStatistics;
     }
+
+    private static String removeRepeatedPatterns(String text) {
+        int len = text.length();
+        for (int i = 1; i <= len / 2; i++) {
+            String pattern = text.substring(0, i);
+            // Manually repeat the substring
+            StringBuilder repeatedPattern = new StringBuilder();
+            int repeats = len / i;
+            for (int j = 0; j < repeats; j++) {
+                repeatedPattern.append(pattern);
+            }
+            // Check if the repeated pattern matches the original string
+            if (repeatedPattern.toString().equals(text)) {
+                return pattern; // Return only the repeated pattern
+            }
+        }
+        return text; // Return the original text if no repeating pattern found
+    }
+
 }

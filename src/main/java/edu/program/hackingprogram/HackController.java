@@ -14,8 +14,7 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.Set;
 
-import static edu.program.hackingprogram.KeyFinder.findKeyUsingFullBruteForce;
-import static edu.program.hackingprogram.KeyFinder.loadDictionary;
+import static edu.program.hackingprogram.KeyFinder.*;
 import static edu.program.hackingprogram.KeyLengthFinder.findKeyLength;
 import static edu.program.hackingprogram.VigenereCipher.decrypt;
 
@@ -57,14 +56,13 @@ public class HackController {
 
         try {
             int keyLength = findKeyLength(encryptedText);
-            status_label.setText(String.valueOf(keyLength));
+            status_label.setText("Key length: " + keyLength + ". ");
             Set<String> dictionary = loadDictionary("word_list.txt");
-            String findKey = findKeyUsingFullBruteForce(encryptedText, keyLength, dictionary, status_second_label);
+            String findKey = findKeyUsingFrequencyAnalysis(encryptedText, keyLength, dictionary, status_second_label);
             String decryptedText = decrypt(encryptedText, findKey);
 
             output_textarea.setText(decryptedText);
             key_output_textarea.setText(findKey);
-//            status_label.setText("Decryption complete.");
         } catch (Exception e) {
             e.printStackTrace();
             status_label.setText("Error decrypting text.");
